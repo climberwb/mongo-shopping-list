@@ -21,12 +21,25 @@ router.post('/items', function(req, res) {
 router.put('/items/:id',function(req,res){
   console.log('inside put routes',req.body.name,req.body.id);
   Item.update(req.body.name,req.body.id,function(item){
-       console.log('inside put routes success');
-      res.status(201).json(item);
+        res.status(201).json(item);
+        
   }, function(err){
       console.log('inside put routes fail');
-      res.status(400).json(err);
+       res.status(404).json(err);
   });
 });
+
+router.delete('/items/:id',function(req,res){
+  console.log('inside destroy routes',req.params);
+  Item.destroy(req.params.id,function(item){
+    console.log('inside destroy routes fail');
+        res.status(201).json(item);
+  }, function(err){
+      console.log('inside destroy routes fail');
+       res.status(404).json(err);
+  });
+});
+
+
 
 module.exports = router; //QUESTION: are you tacking on router.get and router.post onto router module? 

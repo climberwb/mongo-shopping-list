@@ -24,14 +24,29 @@ exports.list = function(callback, errback) {
 exports.update = function(name,id,callback,errback){
     console.log('inside services update',name,id);
     Item.findOneAndUpdate({_id:id},{name:name}, function(err,item){
-       //console.log(errback(err));
-        if(errback){
+       //console.log(err);
+        if(err){
              console.log('inside services update fail');
             console.log(errback(err));
-            errback(err);
+            // errback(err);
             return;
         }
          console.log('inside services update success');
+        callback(item);
+    });
+}
+
+exports.destroy = function(id,callback,errback){
+    console.log('inside services destroy',id);
+    Item.findOneAndRemove({_id:id}, function(err,item){
+       //console.log(err);
+        if(err){
+             console.log('inside services destroy fail');
+            console.log(errback(err));
+            // errback(err);
+            return;
+        }
+         console.log('inside services destroy success');
         callback(item);
     });
 }
