@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.get('/items', function(req, res) {
     Item.list(function(items) {
-        res.json(items);
+        res.status(201).json(items);
     }, function(err) {
         console.log(err);
         res.status(400).json(err);
@@ -35,7 +35,6 @@ router.delete('/items/:id',function(req,res){
   console.log('inside destroy routes',req.params);
   Item.destroy(req.params.id,function(item){
     console.log('inside destroy routes fail');
-    console.log(res);
         res.status(201).json(item);
   }, function(err){
       console.log('inside destroy routes fail');

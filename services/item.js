@@ -22,14 +22,14 @@ exports.list = function(callback, errback) {
 };
 
 exports.update = function(name,id,callback,errback){
-    console.log('inside services update',name,id);
-    Item.findOneAndUpdate({_id:id},{name:name}, function(err,item){
+    console.log('inside services update'+' '+name+' '+id);
+    Item.findOneAndUpdate({_id:id},{name:name},{new: true},function(err,item){
        //console.log(err);
         if(err){
              console.log('inside services update fail');
-            console.log(errback(err));
+             console.log(errback(err));
             // errback(err);
-            return;
+             return;
         }
          console.log('inside services update success');
         callback(item);
